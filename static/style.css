@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f2f2f2;
+}
+
+.header {
+    background: #ffb000;
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.container {
+    max-width: 380px;
+    background: white;
+    margin: -60px auto 0 auto;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.container h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-group {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+button {
+    width: 100%;
+    background: #ffb000;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.footer {
+    text-align: center;
+    color: #888;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+    .container {
+        margin: -50px 15px 0 15px;
+    }
+}
+.login-logo {
+    width: 240px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #ffffff;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+/* ITEM DROPDOWN */
+.dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: #f2f2f2;
+}

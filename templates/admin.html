@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='guru.css') }}">
+
+    <!-- Cropper.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <!-- LOGO -->
+    <div class="sidebar-header">
+        <img src="{{ url_for('static', filename='icons/logo_sekolah.png') }}" class="logo">
+    </div>
+
+    <a href="/admin" data-icon="dashboard">Dashboard</a>
+    <a href="#" data-icon="master">Master Data</a>
+    <a href="#" data-icon="guru">Akun Guru</a>
+    <a href="#" data-icon="absensi">Absensi</a>
+    <a href="/logout" id="sidebar-logout">Logout</a>
+</div>
+
+<!-- AREA KANAN -->
+<div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-title">Absensi Guru</div>
+        <div class="header-user">
+            <div class="user-dropdown">
+                <img src="{{ url_for('static', filename='icons/admin.png') }}" id="user-photo" class="user-icon" alt="Foto User">
+                <button class="dropbtn" type="button">
+                    Hai, Admin ▾
+                </button>
+
+                <div class="dropdown-content">
+                    <div class="dropdown-item" id="edit-profile">Edit Profil</div>
+                    <a href="/logout" class="dropdown-item logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KONTEN -->
+    <div class="content">
+        <!--DASHBOARD-->
+        <div id="dashboard-content">
+            <h3>Selamat Datang</h3>
+            <p>Ini adalah halaman dashboard admin.</p>
+
+            <div class="statistik">
+                <div class="box blue">
+                    <h2>{{ total_guru }}</h2>
+                    <p>Data Guru</p>
+                </div>
+
+                <div class="box green">
+                    <h2>{{ total_jabatan }}</h2>
+                    <p>Data Jabatan</p>
+                </div>
+
+                <div class="box orange">
+                    <h2>{{ total_absensi }}</h2>
+                    <p>Data Absensi</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MASTER DATA -->
+        <div id="master-data-content" style="display:none;">
+            <h3>Master Data Guru</h3>
+            <div class="guru-top-bar" style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <!-- Tombol Tambah Guru -->
+                <button id="add-guru-btn">Tambah Guru</button>
+
+                <!-- Kotak pencarian -->
+                <div class="guru-search">
+                    <input type="text" id="guru-search-input" placeholder="Tulis nama guru...">
+                    <button id="guru-search-btn">Cari</button>
+                </div>
+            </div>
+
+            <!-- Form tambah/edit guru -->
+            <div id="guru-form-container" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 style="text-align:center;" id="guru-form-title">Tambah Guru</h3>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nama Guru & Gelar</label>
+                            <input type="text" id="guru-nama" placeholder="Contoh: Budi Santoso, S.Pd">
+                        </div>
+                        <div class="form-group">
+                            <label>Jabatan</label>
+                            <input type="text" id="guru-jabatan" placeholder="Contoh: Wali Kelas 7A">
+                        </div>
+                        <div class="form-group">
+                            <label>Tempat Lahir</label>
+                            <input type="text" id="guru-tempat">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Lahir</label>
+                            <input type="date" id="guru-tanggal" max="">
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Kelamin</label>
+                            <select id="guru-jk">
+                                <option value="">--Pilih--</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status Perkawinan</label>
+                            <select id="guru-status">
+                                <option value="">--Pilih--</option>
+                                <option value="Menikah">Menikah</option>
+                                <option value="Belum Menikah">Belum Menikah</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>No. HP</label>
+                            <input type="text" id="guru-hp">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat Lengkap</label>
+                            <input type="text" id="guru-alamat">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="guru-email">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="guru-save">Simpan Data</button>
+                        <button type="button" id="guru-cancel">Batal</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Data Guru -->
+            <table id="guru-table" border="1" cellpadding="8" cellspacing="0" style="margin-top:15px; width:100%;">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Guru</th>
+                        <th>Jabatan</th>
+                        <th>No. HP</th>
+                        <th>Email</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data guru akan muncul di sini -->
+                </tbody>
+            </table>
+
+            <div id="guru-table-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                <span>
+                    Tampilkan 
+                    <input type="number" id="guru-per-page" value="10" min="1" style="width:60px;">
+                    data dari <span id="guru-total-data">0</span> data
+                </span>
+                <div id="guru-pagination"></div>
+            </div>
+        </div>
+
+        <!--AKUN GURU-->
+        <div id="akun-guru-content" style="display:none;">
+            <h3>Akun Guru</h3>
+
+            <div class="akun-guru-top-bar" style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <button id="add-akun-btn">Buat Akun</button>
+                <div class="akun-guru-search">
+                    <input type="text" id="akun-search-input" placeholder="Cari guru...">
+                    <button type="button" id="akun-search-btn">Cari</button>
+                </div>
+            </div>
+
+            <!-- Modal Form Buat Akun -->
+            <div id="akun-form-container" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="akun-form-title">Buat Akun Guru</h3>
+                    <form id="akun-form">
+                        <div class="form-group">
+                            <label for="akun-guru">Pilih Guru</label>
+                            <select id="akun-guru">
+                                <option value="">-- Pilih Guru --</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="akun-username">Username</label>
+                            <input type="text" id="akun-username" placeholder="Masukkan username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="akun-password">Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="akun-password" placeholder="Masukkan password">
+                                <button type="button" class="emoji-btn">🫣</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="akun-save">Buat Akun</button>
+                            <button type="button" id="akun-cancel">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tabel Akun Guru -->
+            <table id="akun-table" border="1" style="width:100%; margin-top:12px;">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Guru</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data akun guru akan di-render JS -->
+                </tbody>
+            </table>
+
+            <div id="akun-table-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                <span>
+                    Tampilkan 
+                    <input type="number" id="akun-per-page" value="10" min="1" style="width:60px;">
+                    data dari <span id="akun-total-data">0</span> data
+                </span>
+                <div id="akun-pagination"></div>
+            </div>
+        </div>
+
+        <!-- ABSENSI -->
+        <div id="absensi-content" style="display:none;">
+            <h3>Absensi Guru</h3>
+
+            <!-- Filter Absensi -->
+            <div id="absensi-filter" style="margin-bottom: 10px; display:flex; gap:10px; flex-wrap: wrap; align-items:center;">
+                <select id="filter-nama">
+                    <option value="">-- Semua Guru --</option>
+                    <!-- Opsi guru akan diisi otomatis dari master data JS -->
+                </select>
+
+                <input type="date" id="filter-tanggal" placeholder="Tanggal">
+
+                <select id="filter-bulan">
+                    <option value="">-- Bulan --</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+
+                <input type="text" id="filter-tahun" placeholder="Tahun" style="width:80px;" inputmode="numeric" pattern="\d*">
+
+                <select id="filter-hari">
+                    <option value="">-- Hari --</option>
+                    <option value="0">Minggu</option>
+                    <option value="1">Senin</option>
+                    <option value="2">Selasa</option>
+                    <option value="3">Rabu</option>
+                    <option value="4">Kamis</option>
+                    <option value="5">Jumat</option>
+                    <option value="6">Sabtu</option>
+                </select>
+
+                <button id="filter-apply">Filter</button>
+                <button id="filter-reset">Reset</button>
+            </div>
+
+            <!-- Tabel Absensi -->
+            <table id="absensi-table" border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse;">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Guru</th>
+                        <th>Tanggal</th>
+                        <th>Status Hadir</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Pulang</th>
+                        <th>Alasan / Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data absensi akan di-render JS -->
+                </tbody>
+            </table>
+        </div>
+        
+<!-- Modal Profil Admin -->
+<div id="profile-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 style="text-align:center;">Profil Admin</h2>
+
+        <!-- Foto + Nama Panggilan -->
+        <div class="modal-header-center">
+            <img src="{{ url_for('static', filename='icons/admin.png') }}" id="modal-photo" class="modal-photo">
+            <button type="button" id="change-photo-btn">Ganti Foto</button>
+            <input type="file" id="modal-upload-photo" style="display:none;">
+            <input type="text" id="nickname" placeholder="Nama Panggilan" style="text-align:center; margin-top:10px; font-weight:500; width: 50%;">
+        </div>
+
+        <!-- Form dua kolom -->
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="fullname">Nama Lengkap</label>
+                <input type="text" id="fullname" value="Administrator">
+            </div>
+            <div class="form-group">
+                <label for="gender">Jenis Kelamin</label>
+                <select id="gender">
+                    <option value="">--Pilih--</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="birthplace">Tempat Lahir</label>
+                <input type="text" id="birthplace" placeholder="Jakarta">
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Tanggal Lahir</label>
+                <input type="date" id="birthdate">
+            </div>
+            <div class="form-group">
+                <label for="phone">No. HP</label>
+                <input type="text" id="phone" placeholder="08123456789">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="admin@email.com">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="admin">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+        </div>
+
+        <!-- Tombol simpan -->
+        <div class="modal-footer">
+            <button type="button" id="save-profile">Simpan Perubahan</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cropper modal -->
+<div id="cropper-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Potong Foto</h2>
+        <div>
+            <img id="cropper-image" src="" style="max-width:100%; display:block; margin:auto;">
+        </div>
+        <div class="modal-footer">
+            <button id="crop-save">Simpan Foto</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Navigation (Mobile Only) -->
+<div class="bottom-nav">
+    <a href="#" data-icon="dashboard">
+        <img src="{{ url_for('static', filename='icons/dashboard.png') }}" class="bottom-icon">
+        <span>Dashboard</span>
+    </a>
+    <a href="#" data-icon="master">
+        <img src="{{ url_for('static', filename='icons/master_data.png') }}" class="bottom-icon">
+        <span>Master</span>
+    </a>
+    <a href="#" data-icon="guru">
+        <img src="{{ url_for('static', filename='icons/akun_guru.png') }}" class="bottom-icon">
+        <span>Akun</span>
+    </a>
+    <a href="#" data-icon="absensi">
+        <img src="{{ url_for('static', filename='icons/absensi.png') }}" class="bottom-icon">
+        <span>Absensi</span>
+    </a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+<script src="{{ url_for('static', filename='js/guru.js') }}"></script>
+<script src="{{ url_for('static', filename='js/akun.js') }}"></script>
+<script src="{{ url_for('static', filename='js/confirm.js') }}"></script>
+<script src="{{ url_for('static', filename='js/absensi.js') }}"></script>
+<script src="{{ url_for('static', filename='js/enter-handler.js') }}"></script>
+
+<div id="notification" class="notification"></div>
+
+<!-- Modal Konfirmasi -->
+<div id="confirm-modal" class="confirm-modal">
+    <div class="confirm-box">
+        <p id="confirm-message">Apakah Anda yakin?</p>
+        <div class="confirm-actions">
+            <button id="confirm-yes">Ya</button>
+            <button id="confirm-no">Tidak</button>
+        </div>
+    </div>
+</div>
+
+<div id="search-error" class="popup"></div>
+</body>
+</html>

@@ -1,0 +1,1060 @@
+/* ===== Main container ===== */
+.main {
+    margin-left: 220px; /* lebar sidebar */
+    padding: 20px;
+    margin-top: 60px; /* tinggi header */
+}
+
+/* Content sections */
+.content-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Sidebar menu icons */
+.sidebar a .menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Header */
+.header {
+    background: #ffb001;
+    color: white;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 220px; /* lebar sidebar */
+}
+
+/* Judul di kiri */
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff; /* warna tulisan admin */
+    margin-left: 20px;
+}
+
+/* User di kanan */
+.header-user {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+}
+
+.header-user a:hover {
+    opacity: 0.8;
+}
+
+.header-user span {
+    font-size: 15px;
+}
+
+.user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* biar muncul di kanan foto */
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    z-index: 100;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.user-dropdown {
+    display: flex;          /* foto dan tombol sejajar horizontal */
+    align-items: center;    /* vertikal rata tengah */
+    gap: 8px;               /* jarak foto dan teks */
+    position: relative;     /* supaya dropdown absolute relatif ke sini */
+    cursor: pointer;
+}
+
+.dropdown-content .dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown .dropdown-content .dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.user-dropdown.show .dropdown-content {
+    display: block;
+}
+
+
+/* Jam & tanggal */
+#jam-dashboard, #jam-digital, #jam-izin {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#tanggal-dashboard, #tanggal-digital, #tanggal-izin {
+    font-size: 18px;
+    text-align: center;
+    color: #000;
+}
+
+.grafik-wrapper {
+    width: 100%;
+    height: 280px; /* tinggi grafik pas */
+    margin-top: 10px;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/*  =========================
+    ATUR LEBAR KOLOM TABEL ABSENSI
+    ========================= */
+#izin-keluar-table th:nth-child(1),
+#izin-keluar-table td:nth-child(1),
+#absensi-table th:nth-child(1),
+#absensi-table td:nth-child(1) {
+    width: 40px;
+    text-align: center;
+}
+
+#izin-keluar-table th:nth-child(2),
+#izin-keluar-table td:nth-child(2) {
+    width: 200px;
+}
+
+#absensi-table th:nth-child(2),
+#absensi-table td:nth-child(2) {
+    width: 140px;
+}
+
+#izin-keluar-table th:nth-child(3),
+#izin-keluar-table td:nth-child(3),
+#izin-keluar-table th:nth-child(4),
+#izin-keluar-table td:nth-child(4) {
+    width: 200px;
+    text-align: center;
+}
+
+#absensi-table th:nth-child(3),
+#absensi-table td:nth-child(3) {
+    width: 200px;
+}
+
+#absensi-table th:nth-child(4),
+#absensi-table td:nth-child(4),
+#absensi-table th:nth-child(5),
+#absensi-table td:nth-child(5) {
+    width: 120px;
+    text-align: center;
+}
+
+#absensi-table th:nth-child(6),
+#absensi-table td:nth-child(6) {
+    width: auto;
+    text-align: left;
+}
+
+#absensi-table td:nth-child(6) {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f0f0f0;
+}
+
+/* Buttons */
+.button-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.button-bar button {
+    min-width: 140px;
+    padding: 10px 18px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.button-bar button:hover {
+    background-color: #2c5282;
+}
+
+/* Warna spesifik */
+#btn-absen-masuk {
+    background: #2ecc71;
+    color: white;
+}
+
+#btn-absen-keluar {
+    background: #3498db;
+    color: white;
+}
+
+#btn-izin {
+    background: #f39c12;
+    color: white;
+}
+
+#btn-pulang-duluan {
+    background: #9b59b6;
+    color: white;
+}
+
+.button-bar button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* Filter bar */
+.filter-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+    gap: 10px;
+}
+
+/* Tabel absensi */
+#absensi-table {
+    margin-top: 0;        /* HAPUS jarak atas tabel */
+}
+
+/* Optional: dashboard juga */
+#grafik-absensi {
+    margin-top: 50px;
+}
+
+
+/* ===== Select Bulan dan Tahun ===== */
+#filter-bulan-izin,
+#filter-tahun-izin,
+#filter-bulan-dashboard,
+#filter-tahun-dashboard,
+#filter-bulan-absensi,
+#filter-tahun-absensi {
+    appearance: none; /* hilangkan style default browser */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: #ffffff;
+    background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%225%22%20viewBox%3D%220%200%2010%205%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%205%205-5z%22%20fill%3D%22orange%22/%3E%3C/svg%3E") no-repeat right 10px center;
+    background-size: 10px 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 8px 40px 8px 14px;
+    padding-right: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+/* Hover */
+#filter-bulan-izin:hover,
+#filter-tahun-izin:hover,
+#filter-bulan-dashboard:hover,
+#filter-tahun-dashboard:hover {
+    border-color: #ffb001;
+    box-shadow: 0 6px 14px rgba(255,176,1,0.25);
+}
+
+/* Focus */
+#filter-bulan-dashboard:focus,
+#filter-tahun-dashboard:focus {
+    outline: none;
+    border-color: #ffb001;
+    box-shadow: 0 0 0 3px rgba(255,176,1,0.25);
+}
+
+/* Form popup */
+.form-popup {
+    margin-bottom: 15px;
+}
+
+/* Bottom nav */
+.bottom-nav {
+    display: none; /* akan muncul di mobile via media query */
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.bottom-nav img.bottom-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .main {
+        padding: 20px; /* jarak isi konten dari sidebar kiri & kanan */
+        box-sizing: border-box;
+        margin-top: 0; /* pastikan menempel ke header */
+    }
+    .sidebar {
+        display: none;
+    }
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-top: 1px solid #ccc;
+        justify-content: space-around;
+        padding: 5px 0;
+    }
+}
+
+#izin-keluar-content h3,
+#absensi-content h3,
+#dashboard-content h3 {
+    margin-top: -5px;   /* naik ke atas */
+    margin-bottom: 20px;
+}
+
+/* Mini header jam & tanggal di dashboard */
+.jam-tanggal-section {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    padding: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Jam */
+#jam-izin,
+#jam-digital,
+#jam-dashboard {
+    font-size: 40px;   /* tidak terlalu besar */
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Tanggal */
+#tanggal-izin,
+#tanggal-absensi,
+#tanggal-dashboard {
+    font-size: 16px;
+    color: #555;
+    margin-top: 4px;
+}
+
+/* Grafik */
+.grafik-wrapper {
+    width: 100%;
+    height: 300px; /* tinggi pas */
+    margin-top: 10px;
+}
+#grafik-absensi {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-overlay{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.4);
+    z-index:999;
+}
+
+.modal-form{
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%, -50%);
+    background:white;
+    padding:25px 20px;
+    border-radius:14px;
+    width:90%;
+    max-width:350px;
+    z-index:1000;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+    animation:fadeInScale 0.25s ease;
+}
+
+.modal-form h3{
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.modal-form input{
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.modal-actions{
+    display:flex;
+    gap:10px;
+}
+
+.modal-actions button{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+#modal-submit{
+    background:#2e7dff;
+    color:white;
+}
+
+#modal-cancel{
+    background:#ddd;
+}
+
+@keyframes fadeInScale{
+    from{
+        opacity:0;
+        transform:translate(-50%, -55%) scale(0.9);
+    }
+    to{
+        opacity:1;
+        transform:translate(-50%, -50%) scale(1);
+    }
+}
+
+.modal-form > div:last-child {
+    display: none !important;
+}
+
+/*===== LUAS FORM ALASAN =====/
+/* =========================
+MODAL OVERLAY
+========================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+/* =========================
+    MODAL FORM
+========================= */
+.modal-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 350px; /* tetap sama */
+    max-width: 90%;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.modal-form h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* =========================
+IZIN JAM WRAPPER
+========================= */
+
+.izin-time-wrapper label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.izin-status-banner {
+    display: flex;
+    align-items: center;        /* tengah vertikal */
+    justify-content: center;    /* tengah horizontal */
+    text-align: center;         /* teks rata tengah */
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* =========================
+    TEXTAREA ALASAN
+========================= */
+#modal-input {
+    width: 100%; /* lebarkan textarea sesuai modal */
+    min-width: 0; /* agar responsive */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* =========================
+    MODAL ACTIONS (TOMBOL)
+========================= */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#modal-submit {
+    background-color: #28a745;
+    color: #fff;
+}
+
+#modal-cancel {
+    background-color: #ccc;
+    color: #000;
+}
+
+#izin-notif {
+    width: 100%;       /* ambil full width di atas tombol */
+    order: -1;         /* pastikan selalu di atas di flex */
+    margin-bottom: 10px;
+    color: green;
+    font-weight: bold;
+    text-align: center; /* optional, biar tengah */
+}
+
+.absensi-selesai-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    
+}
+
+/*  =========================
+    FIX PAKSA TINGGI HEADER & ISI TABEL ABSENSI
+    ========================= */
+#izin-keluar-table th,
+#absensi-table th {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+#izin-keluar-table td,
+#absensi-table td {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    vertical-align: middle !important;
+}
+
+.terlambat-banner {
+    background: #c62828;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-align: center;
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* ===============================
+    MODAL WARNING EFFECT
+=============================== */
+.modal-form.warning {
+    animation: modalFlashRed 0.6s ease-in-out infinite;
+    border: 2px solid #ff0000;
+}
+
+@keyframes modalFlashRed {
+    0%   { background-color: #fff; }
+    50%  { background-color: #ffe5e5; }
+    100% { background-color: #fff; }
+}
+
+/* =========================
+    IZIN KELUAR UI
+========================= */
+
+.izin-status-banner{
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 10px 0 15px 0;
+    font-size: 14px;
+    display: none;
+}
+
+.izin-status-banner.success{
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+}
+
+.izin-status-banner.warning{
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.izin-status-banner.error{
+    background: #fdecea;
+    color: #b71c1c;
+    border: 1px solid #f5c6cb;
+}
+
+#izin-submit{
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #1976d2;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#izin-submit:hover{
+    background: #125aa0;
+}
+
+.izin-keluar-form button#izin-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#izin-submit:disabled{
+    background: #b0bec5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* =========================
+    Jam terpisah dari alasan & kirim
+========================= */
+
+.izin-keluar-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;          /* semua elemen di tengah */
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;             /* lebar maksimal modal */
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* =========================
+    Izin keluar baru (elegan & center)
+========================= */
+.izin-keluar-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.izin-time-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.izin-time-wrapper .time-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.izin-time-wrapper .time-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+}
+
+.izin-time-wrapper .time-group input[type="time"] {
+    width: 120px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+
+.izin-time-wrapper .time-group input[type="time"]:focus {
+    border-color: #1976d2;
+    box-shadow: 0 2px 6px rgba(25,118,210,0.3);
+    outline: none;
+}
+
+#izin-alasan {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#izin-submit {
+    width: 100%;
+    max-width: 160px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 25px;
+    background-color: #1976d2;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+#izin-submit:hover {
+    background-color: #125aa0;
+    transform: translateY(-1px);
+}
+
+#izin-submit:disabled {
+    background: #b0bec5;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* ===============================
+    WRAPPER JAM IZIN KELUAR
+   =============================== */
+.izin-time-wrapper {
+    display: flex;
+    justify-content: center;    /* wrapper di tengah modal */
+    gap: 24px;                  /* jarak antar jam */
+    margin-bottom: 16px;
+}
+
+.izin-time-wrapper .time-group {
+    display: flex;
+    flex-direction: column;     /* label di atas input */
+    align-items: center;        /* tengah horizontal */
+    gap: 4px;
+}
+
+.izin-time-wrapper .time-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+}
+
+.izin-time-wrapper .time-group input[type="time"] {
+    width: 120px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+
+.izin-time-wrapper .time-group input[type="time"]:focus {
+    border-color: #1976d2;
+    box-shadow: 0 2px 6px rgba(25,118,210,0.3);
+    outline: none;
+}
+
+
+
+/* ===============================
+    TABEL REKAP IZIN KELUAR
+   =============================== */
+#izin-keluar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#izin-keluar-table thead th {
+    background-color: #012919;   /* SAMA PERSIS seperti absensi */
+    color: white;
+    padding: 8px 2px;            /* tinggi header sama */
+    border: 1px solid #ddd;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#izin-keluar-table tbody td {
+    padding: 4px 4px;            /* tinggi baris sama */
+    border: 1px solid #ddd;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* ===== RESPONSIVE HP ===== */
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        margin-top: 60px;
+        padding: 15px;
+        box-sizing: border-box;
+        padding-bottom: 60px; /* beri ruang untuk bottom nav */
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .header {
+        left: 0;
+        padding: 8px 12px;
+    }
+
+    .header-title {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .header-user span {
+        font-size: 14px;
+    }
+
+    .button-bar {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .button-bar button {
+        flex: 1;
+        min-width: 0;
+        font-size: 13px;
+        padding: 8px 0;
+    }
+
+    #jam-dashboard, #jam-digital, #jam-izin {
+        font-size: 32px;
+    }
+
+    #tanggal-dashboard, #tanggal-digital, #tanggal-izin {
+        font-size: 14px;
+    }
+
+    .modal-form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #izin-alasan, #izin-submit {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .filter-bar {
+        justify-content: center;  /* rata tengah */
+        flex-wrap: wrap;          /* kalau terlalu panjang pindah baris */
+        gap: 10px;                /* jarak antar elemen filter */
+        margin-bottom: 20px;      /* beri jarak ke form */
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #003b1b;
+        border-top: 1px solid #ccc;
+        justify-content: space-around;
+        padding: 4px 0;          /* lebih kecil dari sebelumnya */
+        z-index: 1000;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .bottom-nav a {
+        text-decoration: none;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;         /* teks lebih kecil dan rapi */
+        padding: 4px 0;           /* jarak atas bawah lebih compact */
+        flex: 1;                  /* semua menu rata sama */
+    }
+
+    .bottom-nav img.bottom-icon {
+        width: 22px;              /* ikon lebih kecil */
+        height: 22px;
+        margin-bottom: 2px;       /* jarak ikon ke teks */
+        display: block;
+    }
+
+    .bottom-nav a:hover {
+        color: #ffb001;           /* highlight saat hover */
+    }
+
+    .bottom-nav a.active {
+        color: #ffb001;           /* untuk menu aktif */
+    }
+    
+    .izin-keluar-form {
+        width: 100%;          /* ambil 90% lebar layar */
+        max-width: 360px;    /* maksimal lebar modal */
+        padding: 15px 18px;  /* padding lebih compact */
+        margin: 20px auto;
+        box-sizing: border-box;
+    }
+
+    .izin-time-wrapper {
+        gap: 16px;           /* jarak antar jam lebih kecil */
+    }
+
+    .izin-time-wrapper .time-group input[type="time"] {
+        width: 100px;        /* lebih kecil agar muat */
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    #izin-alasan {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    #izin-submit {
+        max-width: 140px;    /* tombol lebih ramping */
+        padding: 8px 0;
+        font-size: 13px;
+    }
+
+}

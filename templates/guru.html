@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Guru</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='guru.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+</head>
+
+<body>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <img src="{{ url_for('static', filename='icons/logo_sekolah.png') }}" class="logo">
+    </div>
+
+    <a href="#" class="active" data-icon="dashboard">Dashboard</a>
+    <a href="#" data-icon="absensi">Absensi</a>
+    <a href="#" data-icon="izin-keluar">Izin Keluar</a>
+    <a href="/logout" id="sidebar-logout">Logout</a>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-title">Absensi Guru</div>
+    <div class="header-user">
+        <div class="user-dropdown">
+            <img src="{{ url_for('static', filename='icons/admin.png') }}" id="user-photo" class="user-icon" alt="Foto User">
+            <button class="dropbtn" type="button">
+                Hai, Guru ▾
+            </button>
+
+            <div class="dropdown-content">
+                <div class="dropdown-item" id="Lihat-profile">Lihat Profil</div>
+                <a href="/logout" class="dropdown-item logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AREA KANAN -->
+<div class="main">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard-content" class="content-section">
+        <h3>Rekap Absensi</h3>
+
+        <!-- JAM & TANGGAL SEPARATE -->
+        <div id="jam-tanggal-dashboard" class="jam-tanggal-section">
+            <div id="jam-dashboard"></div>
+            <div id="tanggal-dashboard"></div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <select id="filter-bulan-dashboard">
+                <option value="">Semua Bulan</option>
+                <option value="1">Januari</option>
+                <option value="2">Februari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">Agustus</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+            </select>
+
+            <select id="filter-tahun-dashboard">
+                <!-- akan diisi via JS -->
+            </select>
+        </div>
+
+        <!-- GRAFIK -->
+        <div class="grafik-wrapper">
+            <canvas id="grafik-absensi"></canvas>
+        </div>
+    </div>
+
+    <!-- ABSENSI -->
+    <div id="absensi-content" class="content-section" style="display:none;">
+        <h3>Absensi Hari Ini</h3>
+
+        <!-- JAM & TANGGAL SEPARATE -->
+        <div id="jam-tanggal-absensi" class="jam-tanggal-section">
+            <div id="jam-digital"></div>
+            <div id="tanggal-absensi"></div>
+        </div>
+
+        <!-- PESAN SELESAI ABSENSI -->
+        <div id="absensi-selesai-text" class="absensi-selesai-text" style="display:none;">
+            Absensi hari ini selesai, kembali lagi besok tepat waktu
+        </div>
+
+        <div class="button-bar">
+            <div id="izin-notif" class="absensi-selesai-text" style="display:none;"></div>
+            <button id="btn-izin">Izin Tidak Masuk</button>
+            <button id="btn-absen-masuk">Absen Masuk</button>
+            <button id="btn-pulang-duluan" style="display:none;">Pulang Duluan</button>
+            <button id="btn-absen-keluar" style="display:none;">Absen Keluar</button>
+            <div id="izin-status-text" class="izin-status-text" style="display:none;"></div>
+            <button id="btn-reset-dev" style="background:#888;">RESET (DEV)</button>
+        </div>
+
+        <div class="filter-bar" id="filter-bar-absensi">
+            <select id="filter-bulan-absensi">
+                <option value="">Semua Bulan</option>
+                <option value="01">Januari</option>
+                <option value="02">Februari</option>
+                <option value="03">Maret</option>
+                <option value="04">April</option>
+                <option value="05">Mei</option>
+                <option value="06">Juni</option>
+                <option value="07">Juli</option>
+                <option value="08">Agustus</option>
+                <option value="09">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+            </select>
+
+            <select id="filter-tahun-absensi">
+                <!-- nanti diisi via JS -->
+            </select>
+        </div>
+
+        <table id="absensi-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Jam Masuk</th>
+                    <th>Jam Keluar</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- IZIN KELUAR -->
+    <div id="izin-keluar-content" class="content-section" style="display:none;">
+        <h3>Izin Keluar Hari Ini</h3>
+
+        <!-- JAM & TANGGAL -->
+        <div id="jam-tanggal-izin" class="jam-tanggal-section">
+            <div id="jam-izin"></div>
+            <div id="tanggal-izin"></div>
+        </div>
+
+        <!-- STATUS BANNER -->
+        <div id="izin-status-banner" class="izin-status-banner"></div>
+
+        <!-- Form izin keluar -->
+        <div class="izin-keluar-form">
+            <div class="izin-time-wrapper">
+                <div class="time-group">
+                    <label>Dari Jam</label>
+                    <input type="time" id="izin-jam-mulai" min="00:00" max="23:59" step="60">
+                </div>
+
+                <div class="time-group">
+                    <label>Sampai Jam</label>
+                    <input type="time" id="izin-jam-selesai" min="00:00" max="23:59" step="60">
+                </div>
+            </div>
+
+            <textarea id="izin-alasan" placeholder="Isi alasan izin keluar..." rows="3"></textarea>
+
+            <button id="izin-submit">Kirim</button>
+        </div>
+
+        <div class="filter-bar">
+            <select id="filter-bulan-izin">
+                <option value="">Semua Bulan</option>
+                <option value="1">Januari</option>
+                <option value="2">Februari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">Agustus</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+            </select>
+
+            <select id="filter-tahun-izin">
+                <!-- akan diisi via JS -->
+            </select>
+        </div>
+
+        <!-- Tabel rekap izin keluar -->
+        <table id="izin-keluar-table" class="table-style">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jam Mulai</th>
+                    <th>Jam Selesai</th>
+                    <th>Alasan</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <a href="#" class="active" data-icon="dashboard">
+        <img src="{{ url_for('static', filename='icons/dashboard.png') }}" class="bottom-icon"> Dashboard
+    </a>
+    <a href="#" data-icon="absensi">
+        <img src="{{ url_for('static', filename='icons/absensi.png') }}" class="bottom-icon"> Absensi
+    </a>
+    <a href="#" data-icon="izin-keluar">
+        <img src="{{ url_for('static', filename='icons/izin_keluar.png') }}" class="bottom-icon"> Izin Keluar
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/guru-main.js') }}"></script>
+<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" class="modal-overlay" style="display:none;"></div>
+
+<!-- MODAL FORM -->
+<div id="modal-form" class="modal-form" style="display:none;">
+
+    <h3 id="modal-title">Judul</h3>
+
+    <!-- ANIMASI ANGRY -->
+    <div id="angry-animation-wrapper" style="display:none; text-align:center; margin-bottom:10px;">
+        <div id="angry-animation" style="width:120px; height:120px; margin:0 auto;"></div>
+    </div>
+
+    <div id="terlambat-banner" class="terlambat-banner" style="display:none;">
+        ⚠️ KAMU TERLAMBAT! ISI ALASANMU
+    </div>
+
+    <!-- ALASAN -->
+    <textarea id="modal-input" placeholder="Isi keterangan..." rows="3"></textarea>
+
+    <!-- ACTION -->
+    <div class="modal-actions">
+        <button id="modal-submit">Kirim</button>
+        <button id="modal-cancel">Batal</button>
+    </div>
+
+    <div id="izin-countdown"></div>
+</div>
+
